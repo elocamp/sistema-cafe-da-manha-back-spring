@@ -18,28 +18,28 @@ public class CollaboratorController {
     private CollaboratorService service;
 
     @PostMapping
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Collaborator> createCollaborator(@RequestBody CollaboratorDto collaboratorDto) throws Exception {
         Collaborator newCollaborator = service.createCollaborator(collaboratorDto);
         return new ResponseEntity<>(newCollaborator, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<List<Collaborator>> getAll() throws Exception {
         var collaborators = service.getAll();
         return new ResponseEntity<>(collaborators, HttpStatus.OK);
     }
 
     @GetMapping("/{cpf}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Object> getCollaboratorByCPF(@PathVariable(value = "cpf") String cpf) throws Exception {
         var collaborator = service.getCollaboratorByCPF(cpf);
         return new ResponseEntity<>(collaborator, HttpStatus.OK);
     }
 
     @PutMapping("/{cpf}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<String> updateCollaboratorByCPF(@PathVariable(value = "cpf") String cpf,
                                                          @RequestBody CollaboratorDto collaboratorDto) throws Exception {
         service.updateCollaboratorByCPF(cpf, collaboratorDto);
@@ -47,7 +47,7 @@ public class CollaboratorController {
     }
 
     @DeleteMapping("/{cpf}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<String> deleteCollaboratorByCPF(@PathVariable(value = "cpf") String cpf) throws Exception {
         service.deleteCollaboratorByCPF(cpf);
         return ResponseEntity.status(HttpStatus.OK).body("Collaborator has been successfully deleted.");

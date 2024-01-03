@@ -21,28 +21,28 @@ public class FoodController {
     private FoodService service;
 
     @PostMapping
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Food> createFood(@RequestBody FoodDto foodDto) throws Exception {
         Food newFood = service.createFood(foodDto);
         return new ResponseEntity<>(newFood, HttpStatus.CREATED);
     }
 
     @GetMapping
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<List<Food>> getAll() throws Exception {
         var foods = service.getAll();
         return new ResponseEntity<>(foods, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Object> getFoodById(@PathVariable(value = "id") Long id) throws Exception {
         var food = service.getFoodById(id);
         return new ResponseEntity<>(food, HttpStatus.OK);
     }
 
     @GetMapping("/date/{date}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Object> getAllFoodsByDate(@PathVariable(value = "date") String stringDate) throws Exception {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = sdf.parse(stringDate);
@@ -51,14 +51,14 @@ public class FoodController {
     }
 
     @GetMapping("/collaboratorCPF/{collaboratorCPF}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Object> getAllFoodsByCollaboratorCPF(@PathVariable(value = "collaboratorCPF") String collaboratorCPF) throws Exception {
         var foods = service.getAllFoodsByCollaboratorCPF(collaboratorCPF);
         return new ResponseEntity<>(foods, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<String> updateFoodById(@PathVariable(value = "id") Long id,
                                                    @RequestBody FoodDto foodDto) throws Exception {
         service.updateFoodById(id, foodDto);
@@ -66,7 +66,7 @@ public class FoodController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin("http://localhost:3000")
+    @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<String> deleteFoodById(@PathVariable(value = "id") Long id) throws Exception {
         service.deleteFoodById(id);
         return ResponseEntity.status(HttpStatus.OK).body("Food option has been successfully deleted.");
