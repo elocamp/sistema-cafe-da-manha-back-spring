@@ -4,6 +4,7 @@ import com.mv.desafioMV.dto.FoodDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "food")
@@ -24,7 +25,7 @@ public class Food {
     private String collaboratorCPF;
 
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private LocalDate date;
 
     private Boolean brought;
 

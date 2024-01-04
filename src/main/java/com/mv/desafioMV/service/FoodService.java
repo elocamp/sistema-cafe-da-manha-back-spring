@@ -30,16 +30,12 @@ public class FoodService {
             throw new Exception("Collaborator is not registered yet.");
         }
 
-        Date currentDate = new Date();
-
-        if (foodDto.date().before(currentDate)) {
+        if (foodDto.date().isBefore(LocalDate.now())) {
             throw new Exception("Invalid date. Please enter a date equal to or later than today.");
         }
 
-        if (repository.existsByDate(foodDto.date())) {
-            if (repository.existsByName(foodDto.name())) {
-                throw new Exception("Food with the same name already exists at this date.");
-            }
+        if (repository.existsByDate(foodDto.date()) && repository.existsByName(foodDto.name())) {
+            throw new Exception("Food with the same name already exists at this date.");
         }
 
         Food newFood = new Food(foodDto);
@@ -65,14 +61,12 @@ public class FoodService {
             throw new Exception("Collaborator is not registered yet.");
         }
 
-        Date currentDate = new Date();
-
-        if (dto.date().before(currentDate)) {
+        if (dto.date().isBefore(LocalDate.now())) {
             throw new Exception("Invalid date. Please enter a date equal to or later than today.");
         }
 
-        if (repository.existsByDate(dto.date())) {
-            if (repository.existsByName(dto.name())) {
+        if (repository.existsByDate(dto.date()) && repository.existsByName(dto.name())) {
+            if (!(dto.name() == food.getName()) && (dto.date() == food.getDate()) && (dto.brought() != food.getBrought())) {
                 throw new Exception("Food with the same name already exists at this date.");
             }
         }
@@ -86,7 +80,7 @@ public class FoodService {
         return food;
     }
 
-    public List<Food> getAllFoodsByDate(Date date) throws Exception {
+    public List<Food> getAllFoodsByDate(LocalDate date) throws Exception {
         if (!repository.getAllFoodsByDate(date).isEmpty()) {
             return repository.getAllFoodsByDate(date);
         }

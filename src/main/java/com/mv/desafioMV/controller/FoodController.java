@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -44,8 +46,8 @@ public class FoodController {
     @GetMapping("/date/{date}")
     @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<Object> getAllFoodsByDate(@PathVariable(value = "date") String stringDate) throws Exception {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = sdf.parse(stringDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(stringDate, formatter);
         var foods = service.getAllFoodsByDate(date);
         return new ResponseEntity<>(foods, HttpStatus.OK);
     }
@@ -60,7 +62,7 @@ public class FoodController {
     @PutMapping("/{id}")
     @CrossOrigin("https://sistema-cafe-da-manha-front-react.vercel.app/")
     public ResponseEntity<String> updateFoodById(@PathVariable(value = "id") Long id,
-                                                   @RequestBody FoodDto foodDto) throws Exception {
+                                                 @RequestBody FoodDto foodDto) throws Exception {
         service.updateFoodById(id, foodDto);
         return ResponseEntity.status(HttpStatus.OK).body("Food option has been successfully updated.");
     }
